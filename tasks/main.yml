@@ -1,0 +1,28 @@
+---
+- name: Check existing go version
+  ansible.builtin.command: go version
+  changed_when: false
+  failed_when: false
+  register: go_existing_version
+
+- name: Extract Go version
+  ansible.builtin.set_fact:
+     go_installed_version: "{{ go_existing_version.stdout | regex_search('go([0-9.]+)', '\\1') }}"
+  when: go_existing_version.rc == 0
+
+- name: Install Go version {{ go_version }}
+  ansible.builtin.include_tasks: install-go.yml
+  when: >
+    go_existing_version.rc != 0 or (
+      go_existing_version.rc == 0 and
+      go_installed_version is defined and
+      go_installed_version is ansible.builtin.version(go_version, 'ne', version_type='semver')
+    )
+
+- name: Display message for the exact go version already installed
+  ansible.builtin.debug:
+    msg: "The installed version matches exactly the one requested. No action required."
+  when: >
+    go_existing_version.rc == 0 and
+    go_installed_version is defined and
+    go_installed_version is ansible.builtin.version(go_version, 'eq', version_type='semver')
