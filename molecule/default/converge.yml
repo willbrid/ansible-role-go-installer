@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: true
+  vars:
+    go_version: "1.23.10"
+
+  tasks:
+    - name: Include go_installer
+      ansible.builtin.include_role:
+        name: "willbrid.go_installer"
