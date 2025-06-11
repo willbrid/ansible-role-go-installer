@@ -1,9 +1,9 @@
 Ansible-role-go-installer
 =========
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-go-installer/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-go-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-go-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-go-installer/actions/workflows/ci.yml)
 
-Le rôle **ansible-role-go-installer** permet d’installer l'outil de développement **Go** sur des environnements Linux. Il détecte automatiquement la version existante de **Go** (si présente), télécharge et installe la version souhaitée depuis le site officiel de **Go**, et configure l’environnement système (variable **PATH**). Ce rôle est compatible avec les distributions linux.
+Le rôle **ansible-role-go-installer** permet d’installer l'outil de développement **Go** sur les environnements Linux. Il détecte automatiquement la version existante de **Go** (si présente), télécharge et installe la version souhaitée depuis le site officiel de **Go**, et configure l’environnement système (variable **PATH**). Ce rôle est compatible avec les distributions linux.
 
 Exigences
 ------------
