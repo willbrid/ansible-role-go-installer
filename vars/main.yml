@@ -1,0 +1,5 @@
+---
+host_architecture: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+go_base_url: "https://go.dev/dl"
+go_tar_file: "go{{ go_version }}.linux-{{ host_architecture }}.tar.gz"
+go_installation_dir: "/usr/local"
