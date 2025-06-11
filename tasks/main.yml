@@ -1,13 +1,13 @@
 ---
 - name: Check existing go version
-  ansible.builtin.command: go version
+  ansible.builtin.command: "{{ go_installation_dir }}/go/bin/go version"
   changed_when: false
   failed_when: false
   register: go_existing_version
 
 - name: Extract Go version
   ansible.builtin.set_fact:
-     go_installed_version: "{{ go_existing_version.stdout | regex_search('go([0-9.]+)', '\\1') }}"
+     go_installed_version: "{{ (go_existing_version.stdout | regex_search('go([0-9.]+)', '\\1'))[0] }}"
   when: go_existing_version.rc == 0
 
 - name: Install Go version {{ go_version }}
