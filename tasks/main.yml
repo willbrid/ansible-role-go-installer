@@ -7,7 +7,7 @@
 
 - name: Extract Go version
   ansible.builtin.set_fact:
-     go_installed_version: "{{ (go_existing_version.stdout | regex_search('go([0-9.]+)', '\\1'))[0] }}"
+    go_installed_version: "{{ (go_existing_version.stdout | regex_search('go([0-9.]+)', '\\1'))[0] }}"
   when: go_existing_version.rc == 0
 
 - name: Install Go version {{ go_version }}
