@@ -1,0 +1,20 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  vars:
+    go_version: "1.23.10"
+
+  tasks:
+    - name: Check if Go is installed
+      block:
+        - name: Get installed version
+          ansible.builtin.command: "/usr/local/go/bin/go version"
+          changed_when: false
+          failed_when: false
+          register: go_installed_infos
+        - name: Assert that Go is installed
+          ansible.builtin.assert:
+            that:
+              - go_installed_infos.rc == 0
+            fail_msg: "Go version {{ go_version }} is not installed"
