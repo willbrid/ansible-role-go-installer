@@ -1,1 +1,41 @@
 ---
+- name: Download go tar file
+  ansible.builtin.get_url:
+    url: "{{ go_base_url }}/{{ go_tar_file }}"
+    dest: "/tmp/{{ go_tar_file }}"
+    checksum: "{{ (go_checksum != '') | ternary('sha256:' ~ go_checksum, omit) }}"
+
+- name: Delete existing go installation
+  ansible.builtin.file:
+    path: "{{ go_installation_dir }}/go"
+    state: absent
+  when: go_existing_version.rc == 0
+
+- name: Extract go tar file
+  ansible.builtin.unarchive:
+    src: "/tmp/{{ go_tar_file }}"
+    dest: "{{ go_installation_dir }}"
+    owner: root
+    group: root
+    mode: 0755
+    remote_src: yes
+
+- name: Copy go initialisation script
+  ansible.builtin.template:
+    src: "go.sh.j2"
+    dest: "/etc/profile.d/go.sh"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Apply change immediately
+  ansible.builtin.shell: source /etc/profile.d/go.sh && go version
+  changed_when: false
+  register: go_version_result
+
+- name: Ensure the chosen go version is installed
+  ansible.builtin.assert:
+    that: go_version_result.rc == 0
+    fail_msg: "go {{ go_version }} was not installed"
+  changed_when: go_version_result.rc == 0
+  notify: Delete go tar file in /tmp
