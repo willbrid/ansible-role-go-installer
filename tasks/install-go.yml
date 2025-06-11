@@ -30,7 +30,7 @@
     mode: 0644
 
 - name: Apply change immediately
-  ansible.builtin.shell: source /etc/profile.d/go.sh && go version
+  ansible.builtin.shell: bash -c "source /etc/profile.d/go.sh && go version"
   changed_when: false
   register: go_version_result
 
