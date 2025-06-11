@@ -1,0 +1,5 @@
+# go initialization script (sh)
+
+if [ -d "{{ go_installation_dir }}/go" ]; then
+    export PATH="$PATH:{{ go_installation_dir }}/go/bin"
+fi
