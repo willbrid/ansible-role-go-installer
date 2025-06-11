@@ -3,6 +3,7 @@
   ansible.builtin.get_url:
     url: "{{ go_base_url }}/{{ go_tar_file }}"
     dest: "/tmp/{{ go_tar_file }}"
+    mode: 0755
     checksum: "{{ (go_checksum != '') | ternary('sha256:' ~ go_checksum, omit) }}"
 
 - name: Delete existing go installation
