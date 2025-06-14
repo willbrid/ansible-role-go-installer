@@ -29,7 +29,7 @@ Exemple Playbook
 - Installation du rôle
 
 ```bash
-mkdir -p $HOME/install-go/roles
+mkdir -p $HOME/install-go
 ```
 
 ```bash
@@ -43,7 +43,7 @@ vim $HOME/install-go/requirements.yml
 ```
 
 ```
-cd $HOME/install-go && ansible-galaxy install -r requirements.yml --roles-path roles
+cd $HOME/install-go && ansible-galaxy install --force -r requirements.yml
 ```
 
 - Utilisation du rôle dans un playbook
@@ -78,7 +78,7 @@ Lien du site de récupération de la chaine `sha256 checksum` : [https://go.dev/
 
   vars:
     go_version: "1.23.10"
-    go_checksum: "77e5da33bb72aeaef1ba4418b6fe511bc4d041873cbf82e5aa6318740df98717" # pour amd64
+    go_checksum: "77e5da33bb72aeaef1ba4418b6fe511bc4d041873cbf82e5aa6318740df98717" # pour amd64 (bien vouloir mettre à jour car cette valeur n'est qu'un exemple)
 
   roles:
     - ansible-role-go-installer
