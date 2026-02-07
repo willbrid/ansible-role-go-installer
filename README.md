@@ -3,30 +3,30 @@ Ansible-role-go-installer
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/willbrid/ansible-role-go-installer/blob/main/LICENSE) [![CI](https://github.com/willbrid/ansible-role-go-installer/actions/workflows/ci.yml/badge.svg)](https://github.com/willbrid/ansible-role-go-installer/actions/workflows/ci.yml)
 
-Le rôle **ansible-role-go-installer** permet d’installer l'outil de développement **Go** sur les environnements Linux. Il détecte automatiquement la version existante de **Go** (si présente), télécharge et installe la version souhaitée depuis le site officiel de **Go**, et configure l’environnement système (variable **PATH**). Ce rôle est compatible avec les distributions linux.
+The **ansible-role-go-installer** role allows you to install the **Go** development tool on Linux environments. It automatically detects the existing version of **Go** (if present), downloads and installs the desired version from the official **Go** website, and configures the system environment (PATH variable). This role is compatible with Linux distributions.
 
-Exigences
+Requirements
 ------------
 
-- Ce rôle a été testé avec certaines distributions **Debian** (Ubuntu 22.04,24.04, Debian 11,12) et **RedHat** (Rhel 9).
+- This role has been tested with some distributions. **Debian** (Ubuntu 22.04,24.04, Debian 11,12) and **RedHat** (Rhel 9).
 
-Description des Variables
+Description of Variables
 --------------
 
 |Nom|Type|Description|Obligatoire|Valeur par défaut|
 |---|----|-----------|-----------|-----------------|
-`go_version`|str|numéro de version de Go. Format : x.y.z|non|`"1.23.10"`
-`go_checksum`|str|chaine de caractères checksum du fichier archive Go à télécharger|non|`""`
+`go_version`|str|Go version number. Format: x.y.z|no|`"1.23.10"`
+`go_checksum`|str|checksum string of characters from the Go archive file to download|no|`""`
 
-Dépendances
+Dependencies
 ------------
 
-Aucune.
+None.
 
-Exemple Playbook
+Example Playbook
 ----------------
 
-- Installation du rôle
+- Role installation
 
 ```bash
 mkdir -p $HOME/install-go
@@ -46,13 +46,13 @@ vim $HOME/install-go/requirements.yml
 cd $HOME/install-go && ansible-galaxy install --force -r requirements.yml
 ```
 
-- Utilisation du rôle dans un playbook
+- Using the role in a playbook
 
 ```bash
 vim $HOME/install-go/playbook.yml
 ```
 
---- Exemple de contenu du fichier playbook.yml sans configurer la variable `go_checksum`
+--- Example of the content of the **playbook.yml** file without configuring the variable `go_checksum`
 
 ```yaml
 ---
@@ -66,10 +66,9 @@ vim $HOME/install-go/playbook.yml
     - ansible-role-go-installer
 ```
 
---- Exemple de contenu du fichier playbook.yml en configurant la variable `go_checksum`
+--- Example of the content of the **playbook.yml** file when configuring the variable `go_checksum`
 
-> Note: Pour configurer la variable `go_checksum`, il faudrait au préalable connaitre l'architecture de votre système via la commande `uname -m` (`x86_64` = `amd64`). Ainsi vous pourrez mieux choisir la chaine de caractères `sha256 checksum` qui correspond à votre architecture. <br>
-Lien du site de récupération de la chaine `sha256 checksum` : [https://go.dev/dl/](https://go.dev/dl/)
+> Note: To configure the `go_checksum` variable, you first need to know your system architecture using the command `uname -m` (`x86_64` = `amd64`). This will allow you to better choose the `sha256 checksum` string that corresponds to your architecture. <br> Link to the string retrieval site `sha256 checksum` : [https://go.dev/dl/](https://go.dev/dl/)
 
 ```yaml
 ---
@@ -78,13 +77,13 @@ Lien du site de récupération de la chaine `sha256 checksum` : [https://go.dev/
 
   vars:
     go_version: "1.23.10"
-    go_checksum: "77e5da33bb72aeaef1ba4418b6fe511bc4d041873cbf82e5aa6318740df98717" # pour amd64 (bien vouloir mettre à jour car cette valeur n'est qu'un exemple)
+    go_checksum: "77e5da33bb72aeaef1ba4418b6fe511bc4d041873cbf82e5aa6318740df98717" # for amd64 (please update as this value is only an example)
 
   roles:
     - ansible-role-go-installer
 ```
 
-- Exécution du playbook
+- Playbook execution
 
 ```bash
 cd $HOME/install-go && ansible-playbook playbook.yml
@@ -95,7 +94,7 @@ License
 
 MIT
 
-Informations sur l'auteur
+Author Information
 ------------------
 
 William Bridge NGASSAM
