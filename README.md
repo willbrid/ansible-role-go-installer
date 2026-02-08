@@ -13,8 +13,8 @@ Requirements
 Description of Variables
 --------------
 
-|Nom|Type|Description|Obligatoire|Valeur par défaut|
-|---|----|-----------|-----------|-----------------|
+|Name|Type|Description|Mandatory|Default value|
+|----|----|-----------|---------|-------------|
 `go_version`|str|Go version number. Format: x.y.z|no|`"1.23.10"`
 `go_checksum`|str|checksum string of characters from the Go archive file to download|no|`""`
 
